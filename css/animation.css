@@ -1,0 +1,8 @@
+@keyframes goRight {
+	0% {left: 0%;}
+	100% {left: 100%;}
+}
+@keyframes goLeft {
+	0% {left: 100%;}
+	100% {left: 0%;}
+}

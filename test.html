@@ -1,0 +1,230 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/animation.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src='js/jquery.min.js'></script>
+		<script>
+			function animationOut(i){}
+			function animationIn(i){}
+			$( document ).ready(function() {
+				var canAnimate = true;
+				var bluringObject = $("#bluringObject");
+				$("div").each(function(){
+					var thisObject = $(this);
+					if(thisObject.css("text-align") == "center" && thisObject.css("font-size") == "11px" && thisObject.css("font-family") == "arial"){
+						thisObject.css("display", "none");
+					}
+				});
+				$(".printer").on("click", function(e){
+					$("#cubeTransition").children("div").each(function(index){
+						var t = $( this );
+						index++;
+						if(t.hasClass('visible') & canAnimate){
+							canAnimate = false;
+							if($(".p" + index).css('width') == '0px'){
+								$(".p" + index).removeClass('display-none');
+								$(".laserContainer").css("display", "block");
+								$(".p" + index).css('width', '100%');
+								setTimeout(function(){ $(".laserContainer").css("display", "none"); canAnimate=true;}, 4000);
+							}else{
+								$(".laserContainer").css("display", "block");
+								$(".p" + index).css('width', '0%');
+								setTimeout(function(){ $(".laserContainer").css("display", "none"); $(".p" + index).addClass('display-none'); canAnimate=true;}, 4000);
+							}
+						}
+					});
+				});
+			});
+		</script>
+		<style>
+			body{
+				margin: 0px !important;
+			}
+			.display-none{
+				display: none;
+			}
+			#top_10{
+				display: none !important;
+			}
+			.cbalink{
+				display: none !important;
+			}
+			.page1, .page2, .page3, .page4{
+				position:absolute;
+				top:46px;
+				left:0px;
+				width: 100%;
+				height: calc(100% - 46px);
+				z-index: 1;
+			}
+			.p1,.p2,.p3,.p4{
+				position:absolute;
+				top: 46px;
+				left: 0px;
+				width: 0%;
+				height: calc(100% - 46px);
+				background-color: blue;
+				z-index: 2;
+				-webkit-transition: width 4s ease-out;
+				-moz-transition: width 4s ease-out;
+				-o-transition: width 4s ease-out;
+				-ms-transition: width 4s ease-out;
+				transition: width 4s ease-out;
+			}
+			.laser{
+				position: relative;
+				right: -50px;
+				height: calc(100% - 50px);
+				width: 3px;
+				background: #ff0000;
+				display: block;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+
+				-webkit-box-shadow: 0 0 20px 10px #ff0000;
+				-moz-box-shadow: 0 0 20px 10px #ff0000;
+				box-shadow: 0 0 20px 10px #ff0000;
+				z-index: 3;
+			}
+			#printerContainer{
+				position:absolute;
+				top: 0px;
+				right: 15px;
+				z-index: 9999;
+			}
+			.navbar{
+				position: absolute;
+				top:0px;
+				left:0px;
+				width: 100%;
+				height: 46px;
+				z-index: 9998;
+			}
+			.navbar > .nav{
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				height: 100%;
+				-webkit-filter: brightness(30%) sepia(80%);
+				filter: brightness(30%) sepia(80%);
+				background-image: url('1.jpg');
+			}
+			.navbar > .nav > li{
+				float: left;
+				height: 100%;
+			}
+			.navbar > .nav > li > a{
+				display: block;
+				color: white;
+				text-align: center;
+				padding: 14px 16px;
+				text-decoration: none;
+			}
+			.navbar > .nav > li > a:hover{
+				background-color: #111;
+			}
+			.shadow {
+				-webkit-filter: brightness(30%) sepia(80%);
+				filter: brightness(30%) sepia(80%);
+			}
+			.printer{
+				width: 60px; 
+				height: 50px;
+			}
+			.arrow-up {
+				position: relative;
+				right: -25px;
+				display: block;
+			    width: 0px; 
+			    height: 0px; 
+			    border-left: 25px solid transparent;
+			    border-right: 25px solid transparent;
+			    border-bottom: 25px solid black;
+			}
+
+			.arrow-down {
+				position: relative;
+				right: -25px;
+				display: block;
+			    width: 0px; 
+			    height: 0px; 
+			    border-left: 25px solid transparent;
+			    border-right: 25px solid transparent;
+			    border-top: 25px solid black;
+			}
+			
+			.laserContainer{
+				height: 100%;
+				width: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="navbar">
+			<ul class="nav">
+				<li><a href="/test">Home</a></li>
+				<li><a href="/send">Send</a></li>
+			</ul>
+		</div>
+		<div id="cubeTransition">
+			<div class="page1">
+				<img class="shadow" src="1.jpg" alt="">
+			</div>
+			<div class="page2"><h2>Elegant,</h2></div>
+			<div class="page3"><h2>Exciting!</h2></div>
+			<div class="page4"><h2>Simple.</h2></div>
+		</div>
+		<ul id="bullets"></ul>
+		<div id="printerContainer">
+			<img class="printer" src="printer2.png" alt="Print">
+		</div>
+		<div class="p1 display-none">
+			<div class="laserContainer pull-right">
+				<div class="arrow-down"></div>
+				<div class="laser"></div>
+				<div class="arrow-up"></div>
+			</div>
+			<div class="inner">
+				<h2>p1</h2>
+			</div>
+		</div>
+		<div class="p2 display-none">
+			<div class="laserContainer pull-right">
+				<div class="arrow-down"></div>
+				<div class="laser"></div>
+				<div class="arrow-up"></div>
+			</div>
+			<div class="inner">
+				<h2>p2</h2>
+			</div>
+		</div>
+		<div class="p3 display-none">
+			<div class="laserContainer pull-right">
+				<div class="arrow-down"></div>
+				<div class="laser"></div>
+				<div class="arrow-up"></div>
+			</div>
+			<div class="inner">
+				<h2>p3</h2>
+			</div>
+		</div>
+		<div class="p4 display-none">
+			<div class="laserContainer pull-right">
+				<div class="arrow-down"></div>
+				<div class="laser"></div>
+				<div class="arrow-up"></div>
+			</div>
+			<div class="inner">
+				<h2>p4</h2>
+			</div>
+		</div>
+	</body>
+	<script src='js/wheel-indicator.js'></script>
+	<script src="js/jquery.touchSwipe.js"></script>
+	<script src="js/cubeTransition.js"></script>
+</html>
